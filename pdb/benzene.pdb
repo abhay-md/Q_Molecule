@@ -1,0 +1,29 @@
+HEADER    UNCLASSIFIED                            15-Feb-25
+TITLE     ALL ATOM STRUCTURE FOR MOLECULE UNL                                   
+AUTHOR    AUTOMATED TOPOLOGY BUILDER (ATB) REVISION 2025-01-17 09:57:26
+AUTHOR   2  https://atb.uq.edu.au
+HETATM    1   H6 Q37H    0      -1.822  -1.691   0.005  1.00  0.00           H
+HETATM    2   C6 Q37H    0      -1.025  -0.951   0.004  1.00  0.00           C
+HETATM    3   C1 Q37H    0      -1.336   0.412  -0.001  1.00  0.00           C
+HETATM    4   H1 Q37H    0      -2.376   0.731  -0.006  1.00  0.00           H
+HETATM    5   C2 Q37H    0      -0.311   1.363   0.001  1.00  0.00           C
+HETATM    6   H2 Q37H    0      -0.553   2.423   0.012  1.00  0.00           H
+HETATM    7   C3 Q37H    0       1.025   0.952  -0.000  1.00  0.00           C
+HETATM    8   H3 Q37H    0       1.822   1.691   0.001  1.00  0.00           H
+HETATM    9   C4 Q37H    0       1.336  -0.412   0.000  1.00  0.00           C
+HETATM   10   H4 Q37H    0       2.375  -0.731  -0.001  1.00  0.00           H
+HETATM   11   C5 Q37H    0       0.311  -1.363   0.006  1.00  0.00           C
+HETATM   12   H5 Q37H    0       0.553  -2.423   0.004  1.00  0.00           H
+CONECT    1    2
+CONECT    2    1    3   11
+CONECT    3    2    4    5
+CONECT    4    3
+CONECT    5    3    6    7
+CONECT    6    5
+CONECT    7    5    8    9
+CONECT    8    7
+CONECT    9    7   10   11
+CONECT   10    9
+CONECT   11    2    9   12
+CONECT   12   11
+END
