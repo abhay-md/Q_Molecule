@@ -1,17 +1,5 @@
-import qiskit
-from qiskit_ibm_runtime import QiskitRuntimeService
-from qiskit import QuantumCircuit
-from qiskit.visualization import plot_histogram
-from qiskit.quantum_info import Pauli
-from qiskit_aer.primitives import Estimator
-# from qiskit.quantum_info import SparsePauliOp
-from qiskit.quantum_info import Statevector, Pauli
-from qiskit.opflow import I, Z, PauliOp, SummedOp
-# from qiskit.transpiler import generate_preset_pass_manager
-import matplotlib.colors as mcolors
-from qiskit.transpiler.preset_passmanagers import level_0_pass_manager, level_1_pass_manager
+import os
 from qiskit import QuantumCircuit, transpile
-from qiskit_aer import AerSimulator
 import sys
 from qiskit.algorithms import VQD
 from qsubgisom.qsubgisom import ansatz, observable, s4_ansatz
@@ -23,13 +11,11 @@ from qiskit import Aer
 from qiskit.quantum_info import Operator
 from matplotlib import pyplot as plt
 import matplotlib.patches as patches
-import numpy as np
 from tqdm import tqdm
 import networkx as nx
 from networkx.drawing.nx_agraph import graphviz_layout
 import numpy as np
 from openbabel import openbabel, pybel
-from rdkit import Chem
 
 
 def pdb_to_adj_and_pos(pdb_file):
@@ -123,7 +109,7 @@ def plot_solution_edges(g1, *, pos, perm, ax):
                            width=5.0, alpha=0.5, ax=ax)
 
 
-def ibm_single_match_code(adj1=None, adj2=None, max_trials=5, ansatz=ansatz):
+def molecule_substructure_match(adj1=None, adj2=None, max_trials=5, ansatz=ansatz):
     seed = 10283764
     algorithm_globals.random_seed = seed
     rng = np.random.default_rng(seed=seed)
@@ -173,7 +159,7 @@ def ibm_single_match_code(adj1=None, adj2=None, max_trials=5, ansatz=ansatz):
         print(qc.num_qubits)
 
 
-def ibm_single_match_code_vqd(adj1=None, adj2=None, max_trials=2, ansatz=ansatz):
+def molecule_substructure_match_vqd(adj1=None, adj2=None, max_trials=2, ansatz=ansatz):
     seed = 10283764
     algorithm_globals.random_seed = seed
     rng = np.random.default_rng(seed=seed)
@@ -238,9 +224,11 @@ if __name__ == "__main__":
     # adj1 = np.array(nx.adjacency_matrix(g1).todense()) #creates sparse matrix (conection) .todense() converts the matrix forms
     # adj2 = checkboard(4)
     # g2 = nx.from_numpy_array(adj2)
+    # Folder where the current script is located
+    base_dir = os.path.dirname(os.path.abspath(__file__))
     # Load adjacency matrices from PDB files
-    adj1, pos, atom_symbols = pdb_to_adj_and_pos_exclude_hydrogen("/Users/uqasha17/Abhay/code_csiro/git/pdb/benzene.pdb")
-    adj2, pos_1, atom_symbols_1 = pdb_to_adj_and_pos("/Users/uqasha17/Abhay/code_csiro/git/pdb/acetylene.pdb")
+    adj1, pos, atom_symbols = pdb_to_adj_and_pos_exclude_hydrogen(f"{base_dir}" + "/pdb/benzene.pdb")
+    adj2, pos_1, atom_symbols_1 = pdb_to_adj_and_pos(f"{base_dir}"+"/pdb/acetylene.pdb")
     adj1 = pad_to_pow2(adj1)
     adj2 = pad_to_pow2(adj2)
     g1 = nx.from_numpy_array(adj1)
@@ -256,8 +244,8 @@ if __name__ == "__main__":
     axs[1][1].matshow(adj2)
     #plt.savefig('/Users/uqasha17/Abhay/code_csiro/graphs_1.png', dpi=300)
     plt.show()
-    ibm_single_match_code(adj1, adj2, max_trials=2)
-    #ibm_single_match_code_1(adj1, adj2, max_trials=2)
+    molecule_substructure_match(adj1, adj2, max_trials=2)
+    #molecule_substructure_match_match(adj1, adj2, max_trials=2)
     sys.exit("Stopped here after visualization.")
 
 

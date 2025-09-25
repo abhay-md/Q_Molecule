@@ -1,6 +1,0 @@
-networkx
-numpy
-qiskit
-tqdm
-matplotlib
-pygraphviz
