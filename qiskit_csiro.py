@@ -109,7 +109,7 @@ def plot_solution_edges(g1, *, pos, perm, ax):
                            width=5.0, alpha=0.5, ax=ax)
 
 
-def molecule_substructure_match(adj1=None, adj2=None, max_trials=5, ansatz=ansatz):
+def molecule_substructure_match(adj1=None, adj2=None, max_trials=5, ansatz=ansatz, path=None):
     seed = 10283764
     algorithm_globals.random_seed = seed
     rng = np.random.default_rng(seed=seed)
@@ -244,7 +244,7 @@ if __name__ == "__main__":
     axs[1][1].matshow(adj2)
     #plt.savefig('/Users/uqasha17/Abhay/code_csiro/graphs_1.png', dpi=300)
     plt.show()
-    molecule_substructure_match(adj1, adj2, max_trials=2)
+    molecule_substructure_match(adj1, adj2, max_trials=2, path=base_dir)
     #molecule_substructure_match_match(adj1, adj2, max_trials=2)
     sys.exit("Stopped here after visualization.")
 
